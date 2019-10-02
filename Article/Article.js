@@ -112,3 +112,60 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articles = document.querySelector('.articles')
+
+data.forEach(a => {
+  console.log(a.title)
+  articles.appendChild(createArticle(a.title, a.date, a.firstParagraph, a.secondParagraph, a.thirdParagraph))
+})
+
+
+function createArticle(title, date, firstp, secondp, thirdp) {
+  // define new elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const paragraphOne = document.createElement('p');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const eButton = document.createElement('span');
+
+
+  article.classList.add('article')
+  articleDate.classList.add('date')
+  eButton.classList.add("expandButton")
+
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(paragraphOne)
+  article.appendChild(paragraphTwo)
+  article.appendChild(paragraphThree)
+  article.appendChild(eButton)
+
+
+
+  articleTitle.textContent = title
+  articleDate.textContent = date
+  paragraphOne.textContent = firstp
+  paragraphTwo.textContent = secondp
+  paragraphThree.textContent = thirdp
+  eButton.textContent = "Click Here for Article";
+
+
+  eButton.addEventListener('click', event => {
+    article.classList.toggle('article-open')
+    console.log(article.classList.toggle('article-open'))
+    if (article.classList.toggle('article-open') === true){
+      eButton.textContent = "Click to Close";
+      TweenMax.to(article, 1, {height:"400", ease:Back.easeOut.config(1)});
+    } else {
+      eButton.textContent = "Click Here for Article";
+      TweenMax.to(article, 1, {height:"50", ease:Back.easeOut.config(.6)});
+    }
+  })
+
+return article
+}
+
+//Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
