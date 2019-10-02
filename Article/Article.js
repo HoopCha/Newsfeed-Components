@@ -143,6 +143,8 @@ function createArticle(title, date, firstp, secondp, thirdp) {
   article.appendChild(paragraphThree)
   article.appendChild(eButton)
 
+
+
   articleTitle.textContent = title
   articleDate.textContent = date
   paragraphOne.textContent = firstp
@@ -153,6 +155,14 @@ function createArticle(title, date, firstp, secondp, thirdp) {
 
   eButton.addEventListener('click', event => {
     article.classList.toggle('article-open')
+    console.log(article.classList.toggle('article-open'))
+    if (article.classList.toggle('article-open') === true){
+      eButton.textContent = "Click to Close";
+      TweenMax.to(article, 1, {height:"400", ease:Back.easeOut.config(1)});
+    } else {
+      eButton.textContent = "Click Here for Article";
+      TweenMax.to(article, 1, {height:"50", ease:Back.easeOut.config(.6)});
+    }
   })
 
 return article
