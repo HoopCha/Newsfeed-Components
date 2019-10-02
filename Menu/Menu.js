@@ -53,7 +53,15 @@ function createMenu(array){
   menu.classList.add('menu')
 
   menuButton.addEventListener('click', ()=>{
-    menu.classList.toggle('menu--open');
+    if (menu.classList.toggle('menu--open' === true)) {
+      menu.classList.toggle('menu--open')
+    TweenMax.to(".menu", 1, {left:-50, ease:Back.easeOut.config(1)});
+    } else {
+    TweenMax.to(".menu", 1, {left: -700, ease:Back.easeIn.config(1), onComplete:a1});
+    function a1() {
+      menu.classList.toggle('menu--open');
+    }
+    }
   });
 
   return menu
